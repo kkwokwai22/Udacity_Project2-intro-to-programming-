@@ -66,11 +66,22 @@ def set_game_level(user_level_input):
 
 # Checks if a word in parts_of_speech is a substring of the word passed in.
 def word_in_pos(word, parts_of_speech):
-    for pos in parts_of_speech:
-        if pos in word:
-            return pos
+    for i in parts_of_speech:
+        if i in word:
+            return i
     return None
 
+def word_replace(word, replacement, user_input):
+    word = word.replace(',', '')
+    word = word.replace('.', '')
+    word = word.replace(';', '')
+    word = word.replace('\'', '')
+    word = word.replace('\"', '')
+    word = word.replace('\'\'\'', '')
+    word = word.replace(replacement, user_input)
+    return word
+
+# this is the main function for the game.
 def play_game(ml_string, parts_of_speech, proper_answer):
     replaced = []
     new_ml_string = ml_string.split()
@@ -82,18 +93,10 @@ def play_game(ml_string, parts_of_speech, proper_answer):
             while user_input != proper_answer['___'+str(index)+'___']:
                 print "try again!"
                 user_input = input_answer("what should go into blank number " + str(index) + " :")
-            word = word.replace(replacement, user_input)
-            word = word.replace(',', '')
-            word = word.replace('.', '')
-            word = word.replace(';', '')
-            word = word.replace('\'', '')
-            word = word.replace('\"', '')
-            word = word.replace('\'\'\'', '')
-            replaced.append(word)
+            word = word_replace(word, replacement, user_input)
             print " ".join(replaced) + ml_string.split('___'+str(index)+'___')[1]
             index += 1
-        else:
-            replaced.append(word)
+        replaced.append(word)
     replaced = " ".join(replaced)
     return "Thank you for playing " + greeting + " !"
 
