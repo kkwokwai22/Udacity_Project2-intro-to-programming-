@@ -52,6 +52,11 @@ user_level_input = raw_input("Hi " + greeting + " please select the difficulty o
 
 
 def set_game_level(user_level_input):
+    """
+    set_game_level(user_level_input) returns medium strings & dictionary of game level
+    input: easy, medium or hard.
+    output: user_level_inputs strings.
+    """
     if user_level_input == "easy":
         print easy
         return easy, level_easy_answer
@@ -72,6 +77,12 @@ def word_in_pos(word, parts_of_speech):
     return None
 
 def word_replace(word, replacement, user_input):
+    """
+    :param word: sentence being operated/modified
+    :param replacement: string with correct answer
+    :param user_input: the pass in words
+    :return: whole new string with correct answer and no commas and period.
+    """
     word = word.replace(',', '')
     word = word.replace('.', '')
     word = word.replace(';', '')
@@ -83,6 +94,12 @@ def word_replace(word, replacement, user_input):
 
 # this is the main function for the game.
 def play_game(ml_string, parts_of_speech, proper_answer):
+    """
+    :param ml_string: easy/medium/hard level strings
+    :param parts_of_speech: ___number___
+    :param proper_answer: the correct answer in string (pass in word)
+    :return: end of the game (if every word is correct) or you will be loop in the try again.
+    """
     replaced = []
     new_ml_string = ml_string.split()
     index = 1
@@ -92,16 +109,13 @@ def play_game(ml_string, parts_of_speech, proper_answer):
             user_input = raw_input("what should go into blank number " + str(index) + " :")
             while user_input != proper_answer['___'+str(index)+'___']:
                 print "try again!"
-                user_input = input_answer("what should go into blank number " + str(index) + " :")
+                user_input = raw_input("what should go into blank number " + str(index) + " :")
             word = word_replace(word, replacement, user_input)
             print " ".join(replaced) + ml_string.split('___'+str(index)+'___')[1]
             index += 1
         replaced.append(word)
     replaced = " ".join(replaced)
     return "Thank you for playing " + greeting + " !"
-
-def input_answer(phase):
-    return raw_input(phase)
 
 game_sentence , proper_answer = set_game_level(user_level_input)
 
