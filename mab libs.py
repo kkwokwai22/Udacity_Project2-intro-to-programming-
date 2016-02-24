@@ -25,7 +25,7 @@ easy = "There are many ___1___ reasons to choose Python as your primary programm
 # The following are medium level test strings to pass in to the play_game function.
 medium ="___1___ is very fast. The source code is compiled into bytecode, so that executing the same file will be faster," \
         "if the ___2___ will be executed again. " \
-        "The ___3___ is an '''intermediate language'''," \
+        "The ___3___ is an '''intermediate language'''" \
         "which is said to run on a ___4___ machine that executes the machine code corresponding to each bytecode."
 
 # The answer for medium level question
@@ -111,7 +111,7 @@ def play_game(ml_string, parts_of_speech, proper_answer):
                 print "try again!"
                 user_input = raw_input("what should go into blank number " + str(index) + " :")
             word = word_replace(word, replacement, user_input)
-            print " ".join(replaced) + ml_string.split('___'+str(index)+'___')[1]
+            print " ".join(replaced) + ' ' + word + ml_string.split('___'+str(index)+'___')[1]
             index += 1
         replaced.append(word)
     replaced = " ".join(replaced)
